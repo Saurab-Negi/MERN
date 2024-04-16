@@ -29,7 +29,7 @@ const register= async (req, res) =>{
 
         const userCreated= await User.create({username, email, phone, password,});
 
-        res.status(200).json({messsage: userCreated});
+        res.status(200).json({messsage: userCreated, token: await userCreated.generateToken()});
     }
     catch(error){
         res.status(500).json("Internal server error");

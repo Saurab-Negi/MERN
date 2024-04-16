@@ -2,6 +2,8 @@
 
 const bcrypt = require('bcrypt');
 const mongoose= require("mongoose");
+const jwt= require("jsonwebtoken");
+
 const userSchema= new mongoose.Schema({
     username: {
         type: String,
@@ -41,6 +43,9 @@ userSchema.pre('save', async function(next){ //This pre() will act as a middlewa
         next(error);
     }
 })
+
+//json web token
+.userSchema.methods.generateToken= async function () {};
 
 const User= new mongoose.model("User", userSchema);
 
