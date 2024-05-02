@@ -1,4 +1,4 @@
-require("dotenv").config();
+require("dotenv").config(); //Dotenv is a zero-dependency module that loads environment variables from a .env file into process.env
 const express= require('express');
 const app= express();
 const router= require("./router/auth-router");
