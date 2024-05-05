@@ -40,4 +40,31 @@ const register= async (req, res) =>{
     }
 }
 
-module.exports= {home, register};
+//login logic
+const login = async (req, res) =>{
+    try{
+        const {email, password} = req.body;
+        const userExist= await User.findOne({email}); //Checking if the user already exists 
+        if(!userExist){ //If not display below msg
+            return res.status(400).json({message: "Invalid Credentials"});
+        }
+        //const user= await bcrypt.compare(password, userExist.password);
+        const user= await userExist.comparePassword(password);
+
+        if(user){ //If user is already present
+            res.status(200).json({
+            messsage: "Login successful", 
+            token: await userExist.generateToken(),
+            userId: userExist._id.toString(),
+            });
+        }
+        else{
+            res.status(401).json({message: "Invalid email or password"});
+        }
+    }
+    catch(error){
+        res.status(500).json("Internal server error");
+    }
+}
+
+module.exports= {home, register, login};

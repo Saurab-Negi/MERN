@@ -9,5 +9,6 @@ const authControllers= require("../controllers/auth-controller"); //It is a refe
 router.route("/").get(authControllers.home); //GET: Read data
 
 router.route("/register").post(authControllers.register); //POST: Insert data
+router.route("/login").post(authControllers.login); //login route
 
 module.exports= router;

@@ -45,6 +45,12 @@ userSchema.pre('save', async function(next){ //This pre() will act as a middlewa
     }
 })
 
+// compare the password
+
+userSchema.methods.comparePassword= async function (password){
+    return bcrypt.compare(password, this.password);
+};
+
 // Define the method to generate JWT token
 userSchema.methods.generateToken = async function() {
     try{
